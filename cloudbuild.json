@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "name": "node:lts",
+      "entrypoint": "yarn",
+      "args": [
+        "install"
+      ]
+    },
+    {
+      "name": "node:lts",
+      "entrypoint": "yarn",
+      "args": [
+        "build"
+      ],
+      "env": [
+        "PROJECT_ID=$PROJECT_ID"
+      ]
+    },
+    {
+      "name": "gcr.io/$PROJECT_ID/firebase",
+      "args": [
+        "deploy",
+        "-P",
+        "$PROJECT_ID",
+        "--only",
+        "firestore:rules,hosting"
+      ]
+    }
+  ]
+}

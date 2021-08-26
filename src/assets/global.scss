@@ -1,0 +1,204 @@
+.sectionHeader {
+  padding: 20px 5px 5px;
+  padding-left: 10px;
+  border-bottom: var(--v-primary-base) 2px solid;
+  h3, .headerTitle {
+    margin: 0;
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 24px;
+    letter-spacing: 0.50px;
+    color: var(--v-primary-darken1);
+  }
+
+  > .v-input {
+    position: relative;
+    top: -13px;
+    right: 10px;
+  }
+}
+
+h3.subtitle {
+  padding: 5px;
+  border-bottom: 2px solid var(--v-primary-base);
+}
+
+.errorPageMessage {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem 0;
+  font-weight: 400;
+  color: var(--v-grey-base);
+
+  .v-icon {
+    font-size: 6rem;
+    display: block;
+    margin-bottom: 3rem;
+    color: var(--v-grey-base) !important;
+  }
+}
+
+.v-application code {
+  box-shadow: none !important;
+}
+
+pre[class*="language-"] {
+  background: none !important;
+  padding: 0 !important;
+  padding-left: 1em !important;
+  margin: 0 !important;
+}
+
+// Scroll
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border: 0px none transparent;
+  border-radius: 15px;
+}
+::-webkit-scrollbar-track {
+  background: #ddd;
+  border: 0px none transparent;
+  border-radius: 15px;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.v-card__title {
+  display: block !important;
+  .doc-name  {
+    word-break: break-word;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+  .doc-id {
+    color: rgba(0,0,0,.54);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.v-form {
+  .row > div {
+    padding: 0 12px;
+  }
+
+  // fieldset
+  fieldset {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    legend {
+      padding: 0 5px;
+    }
+
+    + fieldset {
+      margin-top: 12px
+    }
+  }
+  .v-text-field--filled:not(.v-text-field--single-line) input {
+    margin-top: 0;
+  }
+
+  .highlightFields input {
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+}
+
+.v-data-table {
+  &.clickRow tr {
+    cursor: pointer !important;
+  }
+}
+
+tr.disabled td:not(:last-child){
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+}
+
+.v-text-field--filled {
+  pointer-events: none;
+}
+
+.v-input__control .v-select__selections {
+  min-height: initial !important;
+}
+
+tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.v-form .checkboxGroup {
+  .v-input--checkbox {
+    margin-top: 0;
+  }
+  b {
+    border-bottom: 2px var(--v-primary-base) solid;
+    display: block;
+  }
+}
+
+.modalBase {
+  overflow: hidden;
+  .v-card__text {
+    padding-top: 1.5em !important;
+    min-height: 45vh;
+    overflow-x: hidden;
+    &.fullscreen {
+      min-height: 10vh;
+      max-height: 85vh;
+    }
+  }
+  .v-card.noPadding {
+    .v-card__text {
+      padding: 0 !important;
+      margin: 0;
+    }
+    &.noOverflow {
+      .v-card__text {
+        overflow: hidden;
+      }
+      .v-tabs-items {
+        padding: 15px 10px !important;
+        overflow: hidden auto;
+        max-height: 45vh;
+      }
+      .v-tabs.v-tabs--grow {
+        border-bottom: 2px var(--v-primary-lighten1) solid;
+      }
+    }
+  }
+}
+
+.subsectionHeader {
+  padding: 20px 5px 5px;
+  padding-left: 10px;
+  border-bottom: var(--v-primary-base) 2px solid;
+  h3, .headerTitle {
+    margin: 0;
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 18px;
+    letter-spacing: 0.50px;
+    color: var(--v-primary-darken1);
+  }
+}
+
+

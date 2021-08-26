@@ -1,0 +1,38 @@
+[
+  {
+    "to": "/",
+    "title": "Dashboard",
+    "icon": "mdi-view-dashboard",
+    "role": "Viewer"
+  },
+  {
+    "to": "/scripts",
+    "title": "Roteiros",
+    "icon": "mdi-playlist-check",
+    "role": "Editor"
+  },
+  {
+    "to": "/cantus",
+    "title": "Projetar (Cantus)",
+    "icon": "mdi-file-presentation-box",
+    "role": "Editor"
+  },
+  {
+    "to": "/contents",
+    "title": "Conteúdos",
+    "icon": "mdi-table-of-contents",
+    "role": "Editor"
+  },
+  {
+    "to": "/labels",
+    "title": "Marcações",
+    "icon": "mdi-label-multiple",
+    "role": "Editor"
+  },
+  {
+    "to": "/users/",
+    "title": "Usuários",
+    "icon": "mdi-account-box-multiple",
+    "role": "Admin"
+  }
+]
