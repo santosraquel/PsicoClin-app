@@ -12,6 +12,7 @@ const configs = [
     messagingSenderId: '169542483402',
     appId: '1:169542483402:web:9215575a7a5df39950e333',
     measurementId: 'G-56N271MYRD',
+
   },
   /* {
     apiKey: 'AIzaSyDemx14a-KEm_4_n520RH0y1ZBLsMvTfWg',
