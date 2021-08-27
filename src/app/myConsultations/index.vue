@@ -18,6 +18,14 @@
       class="elevation-1 clickRow"
       @click:row="open"
     >
+      <template v-slot:[`item.price`]="{ item }">
+        <span :inner-html.prop="item.price | currency" />
+      </template>
+
+      <template v-slot:[`item.dateConsult`]="{ item }">
+        <span :inner-html.prop="item.dateConsult | formatDate" />
+      </template>
+
       <template v-slot:[`item.action`]="{ item }">
         <!-- EDITAR !-->
         <v-btn
@@ -53,10 +61,10 @@
       @cancel="cancelRemove()"
       @confirm="remove(target)"
     >
-      <p>Excluindo usuário com "<b>{{ `${target.name} ${target.lastname} (${target.email})` }}</b>";</p>
+      <p>Excluindo consulta do paciente "<b>{{ `${target.name} ` }}</b>";</p>
       <v-text-field
         v-model="confirmValue"
-        label="Confirme o E-mail"
+        label="Confirme o nome"
         :rules="[rules.required, (v) => canRemove || 'Dados não conferem']"
         outlined
       />
@@ -68,9 +76,9 @@
 import { OnRules } from 'vuetify-js-utils'
 
 import { OnMsg, CrudPage } from '@/mixins'
-import ModalForm from '@/app/users/components/ModalForm'
+import ModalForm from '@/app/consultations/components/ModalForm'
 import ModalConfirm from '@/components/commons/ModalConfirm'
-import { usersService } from '@/app/users/UsersService'
+import { myConsultationsService } from '@/app/consultations/ConsultationsService'
 
 export default {
 
@@ -80,25 +88,20 @@ export default {
 
   data () {
     return {
-      search: '',
-      pageTitle: 'Usuários',
-      docExistsMsg: 'Usuário já cadastrado',
+      pageTitle: 'Consultas',
+      docExistsMsg: 'Consulta já cadastrada',
       headers: [
         {
-          text: 'Nome',
-          value: 'name',
+          text: 'Data',
+          value: 'dateConsult',
         },
         {
-          text: 'Sobrenome',
-          value: 'lastname',
+          text: 'Horário',
+          value: 'time',
         },
         {
-          text: 'E-mail',
-          value: 'email',
-        },
-        {
-          text: 'Grupo de acesso',
-          value: 'role',
+          text: 'Preço',
+          value: 'price',
         },
         {
           text: 'Ações',
@@ -114,12 +117,12 @@ export default {
 
   computed: {
     canRemove () {
-      return this.confirmValue === this.target.email
+      return this.confirmValue === this.target.name
     },
   },
 
   beforeCreate () {
-    this.$service = usersService
+    this.$service = myConsultationsService
   },
 
   methods: {

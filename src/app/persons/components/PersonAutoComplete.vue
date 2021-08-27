@@ -2,18 +2,21 @@
   <div>
     <v-autocomplete
       v-model="modelValue"
-      :items="items"
+      :items="formatedItems"
       :rules="rules"
-      item-text="name"
+      item-text="label"
       item-value="_id"
+      prepend-inner-icon="mdi-account"
       return-object
-      chips
-      :multiple="multiple"
+      hide-no-data
+      hide-selected
+      :append-outer-icon="modelValue && modelValue._id ? 'mdi-pencil' : 'mdi-plus'"
       :loading="loading"
       :search-input.sync="search"
-      :hide-details="hideDetails"
       :label="label"
+      :disabled="disabled"
       :outlined="outlined"
+      no-filter
       @change="$emit('change')"
       @focus="list(' ')"
       @click:append-outer="openForm(modelValue)"
@@ -21,7 +24,7 @@
       <template slot="append-item">
         <v-list-item @click="openForm()">
           <v-list-item-title>
-            Novo Usuário
+            Nova Pessoa
           </v-list-item-title>
         </v-list-item>
       </template>
@@ -32,18 +35,28 @@
 </template>
 
 <script>
-import { usersService } from '../UsersService'
-import { OnAutocomplete } from '~/mixins'
+import { OnAutocomplete } from '@/mixins'
+import { personsService } from '../PersonsService'
 
 export default {
   components: {
-    ModalForm: () => import('./ModalForm'),
+    ModalForm: () => import('./ModalPersonForm'),
   },
 
   mixins: [OnAutocomplete],
 
+  computed: {
+    formatedItems () {
+      return this.items.map((item) => {
+        item.label = `${item.name}`
+        item.label += item.cpfCnpj ? ` | ${item.cpfCnpj}` : ''
+        return item
+      })
+    },
+  },
+
   beforeCreate () {
-    this.$service = usersService
+    this.$service = personsService
   },
 }
 </script>

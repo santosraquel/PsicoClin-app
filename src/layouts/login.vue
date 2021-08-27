@@ -40,11 +40,11 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url('~assets/img/bg-login.jpg') no-repeat center center fixed;
+  background: url('~assets/img/bg-logo.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  opacity: .7;
+  opacity: .5;
 }
 </style>

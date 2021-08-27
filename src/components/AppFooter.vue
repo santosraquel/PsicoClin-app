@@ -5,7 +5,7 @@
   >
     <v-spacer />
     <div class="legalInfo">
-      Tudo por Cristo, nada sem Maria. &copy;{{ new Date().getFullYear() }} Psicoclin&reg;
+      Tudo por Cristo, nada sem Maria. &copy;{{ new Date().getFullYear() }} Liturgiæ&reg;
     </div>
     <!-- <v-btn icon small text target="_blank" href="https://facebook.com/liturgiae.oficial">
       <v-icon small>

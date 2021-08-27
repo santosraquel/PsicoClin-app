@@ -20,9 +20,9 @@ export default function () {
       themes: {
         light: {
           primary: {
-            base: '#dfc58e',
-            lighten1: '#e2dddc',
-            darken1: '#857555',
+            base: '#389DFD',
+            lighten1: '##FDFDFC',
+            darken1: '#FD7600',
           },
           accent: '#8e5b9a',
           secondary: colors.amber.darken3,

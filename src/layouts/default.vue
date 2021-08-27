@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <app-header id="appHeader" />
     <sidebar-menu />
     <v-sheet
       id="appContent"
@@ -18,9 +19,14 @@
 html, body, #app {
   overflow: hidden !important;
 }
-
+#appHeader {
+  z-index: 50;
+}
 #appContent {
   background: var(--v-primary-lighten1);
+  .v-main {
+    padding-top: 70px !important;
+  }
 }
 
 .flexcard {
@@ -31,12 +37,13 @@ html, body, #app {
 
 <script>
 import AppFooter from '~/components/AppFooter.vue'
+import AppHeader from '~/components/AppHeader.vue'
 import SidebarMenu from '~/components/SidebarMenu.vue'
 
 export default {
   middleware: 'authenticate',
 
-  components: { AppFooter, SidebarMenu },
+  components: { AppHeader, AppFooter, SidebarMenu },
 
   data () {
     return {

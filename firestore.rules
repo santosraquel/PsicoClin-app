@@ -30,6 +30,11 @@ service cloud.firestore {
     	allow read, write: if isAdmin()
     }
 
+     match /persons/{person} {
+      allow read: if user == request.auth.token.email;
+      // Only Admins can create and edit users
+    	allow read, write: if isAdmin()
+    }
    // match /scripts/{script} {
     //	allow read, write: if true
     //    }

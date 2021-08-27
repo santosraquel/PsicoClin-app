@@ -3,12 +3,12 @@
     <v-layout class="sectionHeader">
       <h3>{{ pageTitle }}</h3>
       <v-spacer />
-      <v-btn dark color="pink" @click="openForm">
+      <v-btn dark color="pink" @click="openForm()">
         <v-icon>mdi-plus</v-icon>
         Adicionar
       </v-btn>
     </v-layout>
-    <v-progress-linear v-if="loading" indeterminate />
+
     <v-data-table
       :loading="loading"
       :headers="headers"
@@ -16,7 +16,7 @@
       :options.sync="options"
       :server-items-length="count"
       class="elevation-1 clickRow"
-      @click:row="open"
+      @click:row="openForm"
     >
       <template v-slot:[`item.action`]="{ item }">
         <!-- EDITAR !-->
@@ -24,7 +24,7 @@
           color="primary"
           title="Editar"
           icon
-          @click.stop="openForm(item)"
+          @click.prevent="openForm(item)"
         >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
@@ -48,17 +48,19 @@
       v-model="showConfirmModal"
       confirm-btn-color="error"
       confirm-btn-text="Excluir"
-      title="Excluir Usuário"
+      title="Excluir Pessoa"
       :confirm-btn-disabled="!canRemove"
       @cancel="cancelRemove()"
       @confirm="remove(target)"
     >
-      <p>Excluindo usuário com "<b>{{ `${target.name} ${target.lastname} (${target.email})` }}</b>";</p>
+      <p>Excluindo "<b>{{ target.name }}</b>";</p>
       <v-text-field
         v-model="confirmValue"
-        label="Confirme o E-mail"
+        label="Confirme o nome:"
+        :placeholder="target.name"
         :rules="[rules.required, (v) => canRemove || 'Dados não conferem']"
         outlined
+        hide-details
       />
     </modal-confirm>
   </v-container>
@@ -66,11 +68,10 @@
 
 <script>
 import { OnRules } from 'vuetify-js-utils'
-
-import { OnMsg, CrudPage } from '@/mixins'
-import ModalForm from '@/app/users/components/ModalForm'
-import ModalConfirm from '@/components/commons/ModalConfirm'
-import { usersService } from '@/app/users/UsersService'
+import ModalForm from './components/ModalPersonForm'
+import { personsService } from './PersonsService'
+import { OnMsg, CrudPage } from '~/mixins'
+import ModalConfirm from '~/components/commons/ModalConfirm'
 
 export default {
 
@@ -80,25 +81,20 @@ export default {
 
   data () {
     return {
-      search: '',
-      pageTitle: 'Usuários',
-      docExistsMsg: 'Usuário já cadastrado',
+      pageTitle: 'Pacientes',
+      docExistsMsg: 'Pessoa já cadastrado',
       headers: [
         {
           text: 'Nome',
           value: 'name',
         },
         {
-          text: 'Sobrenome',
-          value: 'lastname',
+          text: 'RG',
+          value: 'rg',
         },
         {
-          text: 'E-mail',
-          value: 'email',
-        },
-        {
-          text: 'Grupo de acesso',
-          value: 'role',
+          text: 'CPF',
+          value: 'cpf',
         },
         {
           text: 'Ações',
@@ -114,19 +110,15 @@ export default {
 
   computed: {
     canRemove () {
-      return this.confirmValue === this.target.email
+      return this.confirmValue === this.target.name
     },
   },
 
   beforeCreate () {
-    this.$service = usersService
+    this.$service = personsService
   },
 
   methods: {
-    open (item) {
-      this.$refs.form.open(item)
-    },
-
     removeHandler (item) {
       this.target = item
       this.showConfirmModal = true

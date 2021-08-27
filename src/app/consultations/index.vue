@@ -3,16 +3,6 @@
     <v-layout class="sectionHeader">
       <h3>{{ pageTitle }}</h3>
       <v-spacer />
-      <v-text-field
-        v-model="search"
-        hide-details
-        clearable
-        label="Pesquisar"
-        append-icon="mdi-magnify"
-        @keyup="autoList()"
-        @keyup.enter="list()"
-        @click:append="list()"
-      />
       <v-btn dark color="pink" @click="openForm">
         <v-icon>mdi-plus</v-icon>
         Adicionar
@@ -28,6 +18,14 @@
       class="elevation-1 clickRow"
       @click:row="open"
     >
+      <template v-slot:[`item.price`]="{ item }">
+        <span :inner-html.prop="item.price | currency" />
+      </template>
+
+      <template v-slot:[`item.dateConsult`]="{ item }">
+        <span :inner-html.prop="item.dateConsult | formatDate" />
+      </template>
+
       <template v-slot:[`item.action`]="{ item }">
         <!-- EDITAR !-->
         <v-btn
@@ -63,10 +61,10 @@
       @cancel="cancelRemove()"
       @confirm="remove(target)"
     >
-      <p>Excluindo usuário com "<b>{{ `${target.name} ${target.lastname} (${target.email})` }}</b>";</p>
+      <p>Excluindo consulta do paciente "<b>{{ `${target.name} ` }}</b>";</p>
       <v-text-field
         v-model="confirmValue"
-        label="Confirme o E-mail"
+        label="Confirme o nome"
         :rules="[rules.required, (v) => canRemove || 'Dados não conferem']"
         outlined
       />
@@ -77,38 +75,37 @@
 <script>
 import { OnRules } from 'vuetify-js-utils'
 
-import { OnMsg, OnCrudPage } from '@/mixins'
-import ModalForm from '@/app/users/components/ModalForm'
+import { OnMsg, CrudPage } from '@/mixins'
+import ModalForm from '@/app/consultations/components/ModalForm'
 import ModalConfirm from '@/components/commons/ModalConfirm'
-import { usersService } from '@/app/users/UsersService'
+import { consultationsService } from '@/app/consultations/ConsultationsService'
 
 export default {
 
   components: { ModalForm, ModalConfirm },
 
-  mixins: [OnCrudPage, OnRules, OnMsg],
+  mixins: [CrudPage, OnRules, OnMsg],
 
   data () {
     return {
-      search: '',
-      pageTitle: 'Usuários',
-      docExistsMsg: 'Usuário já cadastrado',
+      pageTitle: 'Consultas',
+      docExistsMsg: 'Consulta já cadastrada',
       headers: [
         {
           text: 'Nome',
-          value: 'name',
+          value: 'person.name',
         },
         {
-          text: 'Sobrenome',
-          value: 'lastname',
+          text: 'Data',
+          value: 'dateConsult',
         },
         {
-          text: 'E-mail',
-          value: 'email',
+          text: 'Horário',
+          value: 'time',
         },
         {
-          text: 'Grupo de acesso',
-          value: 'role',
+          text: 'Preço',
+          value: 'price',
         },
         {
           text: 'Ações',
@@ -124,12 +121,12 @@ export default {
 
   computed: {
     canRemove () {
-      return this.confirmValue === this.target.email
+      return this.confirmValue === this.target.name
     },
   },
 
   beforeCreate () {
-    this.$service = usersService
+    this.$service = consultationsService
   },
 
   methods: {

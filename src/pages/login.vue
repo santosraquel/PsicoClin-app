@@ -6,8 +6,8 @@
           contain
           max-width="250"
           class="mx-auto"
-          alt="Psicoclin"
-          src="/logo.svg"
+          alt="PsicoClin"
+          src="/logo.png"
         />
       </p>
       <!-- title -->

@@ -13,10 +13,6 @@
           :rules="[rules.required]"
         />
         <v-text-field
-          v-model="target.nickname"
-          label="Apelido"
-        />
-        <v-text-field
           v-model="target.email"
           label="E-mail"
           type="email"
@@ -25,7 +21,7 @@
         <v-select
           v-model="target.role"
           :rules="[rules.required]"
-          :items="['Viewer', 'Editor', 'Admin']"
+          :items="['Viewer', 'Admin']"
           label="Grupo de acesso"
         />
       </v-form>

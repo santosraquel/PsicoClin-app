@@ -14,8 +14,8 @@
         <h1>
           <v-img
             max-width="150"
-            alt="PsicoClin"
-            src="/logo.svg"
+            alt="Psicoclin"
+            src="/logo.png"
           />
         </h1>
       </a>

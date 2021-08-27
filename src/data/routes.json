@@ -6,33 +6,43 @@
     "role": "Viewer"
   },
   {
-    "to": "/scripts",
-    "title": "Roteiros",
-    "icon": "mdi-playlist-check",
-    "role": "Editor"
+    "title": "Minhas Consultas",
+    "icon": "mdi-account",
+    "role": "Editor",
+    "items": [
+      {
+        "to": "/myConsultations/",
+        "title": "Consultas",
+        "icon": "fact_check",
+        "role": "Viewer, Editor"
+      }
+    ]
   },
+
   {
-    "to": "/cantus",
-    "title": "Projetar (Cantus)",
-    "icon": "mdi-file-presentation-box",
-    "role": "Editor"
-  },
-  {
-    "to": "/contents",
-    "title": "Conteúdos",
-    "icon": "mdi-table-of-contents",
-    "role": "Editor"
-  },
-  {
-    "to": "/labels",
-    "title": "Marcações",
-    "icon": "mdi-label-multiple",
-    "role": "Editor"
-  },
-  {
-    "to": "/users/",
-    "title": "Usuários",
-    "icon": "mdi-account-box-multiple",
-    "role": "Admin"
+    "title": "Admin",
+    "icon": "mdi-account",
+    "role": "Editor",
+    "items": [
+      {
+        "to": "/users/",
+        "title": "Usuários",
+        "icon": "mdi-account",
+        "role": "Admin"
+      },    
+      {  
+      "to": "/persons/",
+      "title": "Pacientes",
+      "icon": "people",
+      "role": "Admin"
+      },
+      {
+        "to": "/consultations/",
+        "title": "Consultas",
+        "icon": "fact_check",
+        "role": "Admin"
+      }
+      
+    ]
   }
 ]
